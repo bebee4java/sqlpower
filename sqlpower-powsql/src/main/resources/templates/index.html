@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SQL Power</title>
+
+    <style>
+        .form{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        .form .title {
+            font-size: 32px;
+            font-weight: 500;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form .commit {
+            width: 100px;
+            height: 30px;
+            font-size: 18px;
+            margin-top: 30px;
+            background-color: #b3d4fc;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+<form action="/sqlpower" method="post" class="form">
+    <span class="title">Welcome to SQLPower</span>
+    <textarea id="sql" name="sql" style="width: 70%;height: 300px"></textarea>
+    <input class="commit" type="submit" value="commit">
+</form>
+</body>
+</html>
+
+
+

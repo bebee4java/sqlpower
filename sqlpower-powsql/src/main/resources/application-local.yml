@@ -1,0 +1,4 @@
+# 关闭缓存，不重启刷新html
+spring:
+  thymeleaf:
+    cache: false
