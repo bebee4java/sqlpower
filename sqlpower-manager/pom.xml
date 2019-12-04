@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sqlpower-spark-2.4</artifactId>
+    <artifactId>sqlpower-manage</artifactId>
 
     <dependencies>
         <dependency>
@@ -17,20 +17,7 @@
             <artifactId>sqlpower-commons</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_${scala.compat.version}</artifactId>
-            <version>${spark.version}</version>
-            <!--<scope>test</scope>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_${scala.compat.version}</artifactId>
-            <version>${spark.version}</version>
-            <!--<scope>test</scope>-->
-        </dependency>
     </dependencies>
+
 
 </project>

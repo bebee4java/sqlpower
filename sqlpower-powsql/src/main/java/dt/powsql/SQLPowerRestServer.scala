@@ -11,8 +11,11 @@ import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
 @ComponentScan(basePackages = Array("dt.powsql.rest"))
-class SQLPower
+class SQLPowerRestServer
 
-object SQLPower extends App {
-  SpringApplication.run(classOf[SQLPower])
+object SQLPowerRestServer {
+
+  def main(args: Array[String]): Unit = {
+    SpringApplication.run(classOf[SQLPowerRestServer])
+  }
 }

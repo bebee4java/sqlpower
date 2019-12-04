@@ -41,6 +41,8 @@
         <module>sqlpower-spark-2.4</module>
         <module>sqlpower-powsql</module>
         <module>sqlpower-commons</module>
+        <module>sqlpower-manager</module>
+        <module>sqlpower-flink</module>
     </modules>
 
     <properties>

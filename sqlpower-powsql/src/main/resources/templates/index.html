@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>SQL Power</title>
 
-    <style>
+    <style type="text/css">
         .form{
             display: flex;
             flex-direction: column;
@@ -18,6 +18,12 @@
             margin-bottom: 30px;
         }
 
+        .form #sql {
+            width: 70%;
+            height: 300px;
+            font-size: 18px;
+        }
+
         .form .commit {
             width: 100px;
             height: 30px;
@@ -26,14 +32,72 @@
             background-color: #b3d4fc;
             border-radius:10px;
         }
+        #result{
+            margin-top: 22px;
+            border-collapse: collapse;
+        }
+        #result td,th {
+            border: 1px solid #666;
+        }
+        #result tr:nth-child(odd){
+            background: #f9f9f9;
+        }
+        #result tr:hover{
+            background: #f9f9f9;
+        }
+        #result thead tr:hover{
+            background: transparent;
+        }
+
     </style>
 </head>
 <body>
-<form action="/sqlpower" method="post" class="form">
+<form action="#" method="post" class="form">
     <span class="title">Welcome to SQLPower</span>
-    <textarea id="sql" name="sql" style="width: 70%;height: 300px"></textarea>
-    <input class="commit" type="submit" value="commit">
+    <textarea id="sql" name="sql"></textarea>
+    <input id="commit" class="commit" type="button" value="commit">
 </form>
+<table id="result">
+</table>
+
+<script src="/sqlpower/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        $('#commit').click(function () {
+            $("#result").empty();
+            console.log("run script....");
+            jQuery.ajax({
+                url: "/sqlpower/run/script",
+                type: "post",
+                dataType: "json",
+                async: true,
+                data: {"sql": $('#sql').val()},
+                success: function(data){
+                    //[{"id":1,"name":"s"}]
+                    var html = '';
+                    var titles = [];
+                    for(var i = 0; i < data.length; i ++) {
+                        html += "<tr>";
+                        for (var key in data[i]) {
+                            if (i == 0) titles.push(key);
+                            html += "<td>"+data[i][key]+"</td>";
+                        }
+                        html+"</tr>";
+                    }
+                    var titleHtml = '<tr>';
+                    for (var i in titles) {
+                        titleHtml += "<th>"+titles[i]+"</th>";
+                    }
+                    titleHtml += "</tr>";
+
+                    $("#result").append(titleHtml + html);
+
+                }
+            });
+            console.log("script run end!");
+        })
+    })
+</script>
 </body>
 </html>
 
