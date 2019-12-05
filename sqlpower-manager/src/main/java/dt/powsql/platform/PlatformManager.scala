@@ -94,7 +94,8 @@ object PlatformManager {
   def FLINK = "flink"
 
   def platformNameMapping = Map[String, String](
-    SPARK -> "dt.powsql.runtime.SparkRuntime"
+    SPARK -> "dt.powsql.runtime.SparkRuntime",
+    FLINK -> "dt.powsql.runtime.FlinkRuntime"
   )
 
 

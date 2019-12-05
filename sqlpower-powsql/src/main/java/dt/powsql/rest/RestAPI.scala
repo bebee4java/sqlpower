@@ -2,13 +2,12 @@ package dt.powsql.rest
 
 import java.util
 
-import dt.powsql.log.{Logger, Logging}
+import dt.powsql.log.Logging
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, ResponseBody}
 import java.util.{Map => JMap}
 
 import dt.powsql.platform.PlatformManager
-import javax.servlet.http.HttpServletRequest
 
 
 /**
@@ -17,10 +16,10 @@ import javax.servlet.http.HttpServletRequest
   */
 
 @Controller
-class RestAPI extends Logging {
+class RestAPI extends RequestHolder with Logging {
 
   @RequestMapping(value = Array("/"))
-  def index() : String = {
+  def index : String = {
     logInfo("jump to index.html")
     "index"
   }
@@ -28,20 +27,21 @@ class RestAPI extends Logging {
 
   @RequestMapping(value = Array("/hello"), method = Array(RequestMethod.GET))
   @ResponseBody
-  def hello() : String = {
+  def hello : String = {
     "hello developer (^_^)"
   }
 
   @RequestMapping(value = Array("/run/script"),
     method = Array(RequestMethod.GET, RequestMethod.POST))
   @ResponseBody
-  def run(request:HttpServletRequest) : Array[JMap[String,Any]] = {
+  def run : Array[JMap[String,Any]] = {
     logInfo("run script...")
-    val requestMap = request.getParameterMap
+
+    val sql = params("sql")
+    logInfo(s"script:\n $sql")
+
 
     val map = new util.HashMap[String,Any]()
-
-
 
     logInfo("run script succeed!!")
     Array[JMap[String,Any]](map)
