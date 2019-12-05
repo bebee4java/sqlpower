@@ -38,11 +38,9 @@
     </developers>
 
     <modules>
-        <module>sqlpower-spark-2.4</module>
         <module>sqlpower-powsql</module>
         <module>sqlpower-commons</module>
         <module>sqlpower-manager</module>
-        <module>sqlpower-flink</module>
     </modules>
 
     <properties>
@@ -63,6 +61,36 @@
         <hadoop-client-version>2.7.6</hadoop-client-version>
 
     </properties>
+
+    <profiles>
+        <profile>
+            <id>spark-2.4.0</id>
+            <properties>
+                <spark.version>2.4.3</spark.version>
+                <spark.bigversion>2.4</spark.bigversion>
+            </properties>
+            <modules>
+                <module>sqlpower-spark-2.4</module>
+            </modules>
+            <dependencies>
+
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>flink-1.8.2</id>
+            <properties>
+                <flink.version>1.8.2</flink.version>
+            </properties>
+            <modules>
+                <module>sqlpower-flink</module>
+            </modules>
+            <dependencies>
+
+            </dependencies>
+        </profile>
+
+    </profiles>
 
     <repositories>
         <repository>
@@ -132,29 +160,5 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-        <plugins>
-            <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-                <version>${plugin.maven.scala.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
