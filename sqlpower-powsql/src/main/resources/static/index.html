@@ -60,14 +60,14 @@
 <table id="result">
 </table>
 
-<script src="/sqlpower/jquery-3.4.1.min.js"></script>
+<script src="/jquery-3.4.1.min.js"></script>
 <script>
     $(function () {
         $('#commit').click(function () {
             $("#result").empty();
             console.log("run script....");
             jQuery.ajax({
-                url: "/sqlpower/run/script",
+                url: "/run/script",
                 type: "post",
                 dataType: "json",
                 async: true,

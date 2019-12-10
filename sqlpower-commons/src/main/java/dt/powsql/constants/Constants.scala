@@ -11,4 +11,6 @@ object Constants {
   val master = "sqlpower.master"
 
   val enableHive = "sqlpower.enableHiveSupport"
+
+  val restPort = "sqlpower.rest.port"
 }

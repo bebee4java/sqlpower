@@ -31,7 +31,7 @@ class SparkRuntime(_params:Map[Any, Any]) extends SQLRuntime with Logging{
       conf.set(f._1.toString, f._2.toString)
     }
 
-    conf.setAppName(PowSQLConf.MASTER.get.toString)
+    conf.setAppName(PowSQLConf.APPNAME.get.toString)
 
     if (PowSQLConf.MASTER.isDefined) {
       conf.setMaster(PowSQLConf.MASTER.get.toString)
@@ -45,14 +45,14 @@ class SparkRuntime(_params:Map[Any, Any]) extends SQLRuntime with Logging{
 
     PowSQLConf.show(params.map(kv => (kv._1.toString, kv._2.toString)))
 
+    val ss = sparkSession.getOrCreate()
     logInfo("Spark Runtime created!!!")
-
-    sparkSession.getOrCreate()
+    ss
   }
 
   SparkRuntime.setLastInstantiatedContext(this)
 
-  override def startRuntime: SQLRuntime = ???
+  override def startRuntime: SQLRuntime = this
 
   override def awaitTermination: Unit = ???
 

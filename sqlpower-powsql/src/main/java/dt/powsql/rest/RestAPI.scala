@@ -4,10 +4,11 @@ import java.util
 
 import dt.powsql.log.Logging
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, ResponseBody}
+import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, RequestParam, ResponseBody}
 import java.util.{Map => JMap}
 
 import dt.powsql.platform.PlatformManager
+import io.swagger.annotations.{ApiImplicitParam, ApiImplicitParams, ApiOperation}
 
 
 /**
@@ -18,17 +19,18 @@ import dt.powsql.platform.PlatformManager
 @Controller
 class RestAPI extends RequestHolder with Logging {
 
-  @RequestMapping(value = Array("/"))
-  def index : String = {
-    logInfo("jump to index.html")
-    "index"
-  }
-
-
   @RequestMapping(value = Array("/hello"), method = Array(RequestMethod.GET))
+  @ApiOperation(
+    value = "welcome",
+    notes = "SQLPower say hello to you"
+  )
+  @ApiImplicitParams(value = Array(
+    new ApiImplicitParam(name = "username", value = "用户名",
+      dataType = "string", defaultValue = "developer")
+  ))
   @ResponseBody
-  def hello : String = {
-    "hello developer (^_^)"
+  def hello(@RequestParam username:String) : String = {
+    s"hello $username (^_^)"
   }
 
   @RequestMapping(value = Array("/run/script"),

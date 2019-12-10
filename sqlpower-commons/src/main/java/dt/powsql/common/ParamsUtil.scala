@@ -34,6 +34,8 @@ class ParamsUtil() {
 
   def getIntParam(key: String, defaultValue: Int): Int = NumberUtil.getIntValue(getParam(key), defaultValue)
 
+  def getIntParam(key: String) : Int = getParam(key).toInt
+
   def getBooleanParam(key: String): Boolean = "true" == getParam(key, "").toLowerCase
 
   def getBooleanParam(key: String, defaultValue: Boolean): Boolean = if (hasParam(key)) getBooleanParam(key) else defaultValue

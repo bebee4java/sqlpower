@@ -15,7 +15,6 @@ class PlatformManager extends Logging {
   self =>
   val config = new AtomicReference[ParamsUtil]()
 
-
   def run(_params: ParamsUtil, reRun: Boolean = false) = {
 
     if (!reRun) {
@@ -24,9 +23,6 @@ class PlatformManager extends Logging {
 
     val params = config.get()
 
-    if (params.getBooleanParam(Constants.rest, false) && !reRun) {
-      startRestServer
-    }
 
     try {
       val runtime = PlatformManager.getRuntime
@@ -36,12 +32,6 @@ class PlatformManager extends Logging {
         System.exit(-1)
     }
 
-  }
-
-  def startRestServer = {
-    val clazz = Class.forName("dt.powsql.SQLPowerRestServer")
-    clazz.getMethod("main", classOf[Array[String]])
-      .invoke(null, Array[String]())
   }
 
   PlatformManager.setLastInstantiatedContext(self)
