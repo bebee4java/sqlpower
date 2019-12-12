@@ -24,5 +24,61 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>shade</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <!--<minimizeJar>true</minimizeJar>-->
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                                <configuration>
+                                    <relocations>
+                                        <relocation>
+                                            <pattern>org.yaml.snakeyaml</pattern>
+                                            <shadedPattern>my.yaml.snakeyaml</shadedPattern>
+                                        </relocation>
+                                        <relocation>
+                                            <pattern>javax.validation</pattern>
+                                            <shadedPattern>shade.javax.validation</shadedPattern>
+                                        </relocation>
+                                        <relocation>
+                                            <pattern>com.google.gson</pattern>
+                                            <shadedPattern>shade.google.gson</shadedPattern>
+                                        </relocation>
+                                        <relocation>
+                                            <pattern>com.google.common</pattern>
+                                            <shadedPattern>shade.com.google.common</shadedPattern>
+                                        </relocation>
+                                    </relocations>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

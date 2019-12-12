@@ -27,7 +27,7 @@ class PlatformManager extends Logging {
     try {
       val runtime = PlatformManager.getRuntime
     } catch {
-      case e:Exception =>
+      case e=>
         logError(e.getMessage, e)
         System.exit(-1)
     }
