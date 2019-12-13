@@ -1,55 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>SQL Power</title>
-
-    <style type="text/css">
-        .form{
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
-        .form .title {
-            font-size: 32px;
-            font-weight: 500;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-
-        .form #sql {
-            width: 70%;
-            height: 300px;
-            font-size: 18px;
-        }
-
-        .form .commit {
-            width: 100px;
-            height: 30px;
-            font-size: 18px;
-            margin-top: 30px;
-            background-color: #b3d4fc;
-            border-radius:10px;
-        }
-        #result{
-            margin-top: 22px;
-            border-collapse: collapse;
-        }
-        #result td,th {
-            border: 1px solid #666;
-        }
-        #result tr:nth-child(odd){
-            background: #f9f9f9;
-        }
-        #result tr:hover{
-            background: #f9f9f9;
-        }
-        #result thead tr:hover{
-            background: transparent;
-        }
-
-    </style>
+    <!--引入css-->
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
 <form action="#" method="post" class="form">
@@ -57,40 +12,62 @@
     <textarea id="sql" name="sql"></textarea>
     <input id="commit" class="commit" type="button" value="commit">
 </form>
-<table id="result">
-</table>
+<div id="result">
+</div>
+<div class="mask">
+</div>
+<div class="content">
+
+    <div class="column">
+        <div class="container animation-2">
+            <div class="shape shape1"></div>
+            <div class="shape shape2"></div>
+            <div class="shape shape3"></div>
+            <div class="shape shape4"></div>
+        </div>
+    </div>
+</div>
 
 <script src="/jquery-3.4.1.min.js"></script>
 <script>
     $(function () {
         $('#commit').click(function () {
             $("#result").empty();
+            $(".mask").css("display", "block");
+            $(".content").css("display", "block");
             console.log("run script....");
-            jQuery.ajax({
+
+            $.ajax({
                 url: "/run/script",
                 type: "post",
                 dataType: "json",
                 async: true,
                 data: {"sql": $('#sql').val()},
-                success: function(data){
+                success: function (data) {
                     //[{"id":1,"name":"s"}]
                     var html = '';
                     var titles = [];
-                    for(var i = 0; i < data.length; i ++) {
+                    for (var i = 0; i < data.length; i++) {
                         html += "<tr>";
                         for (var key in data[i]) {
                             if (i == 0) titles.push(key);
-                            html += "<td>"+data[i][key]+"</td>";
+                            html += "<td>" + data[i][key] + "</td>";
                         }
-                        html+"</tr>";
+                        html + "</tr>";
                     }
-                    var titleHtml = '<tr>';
+                    var titleHtml = '<thead><tr>';
                     for (var i in titles) {
-                        titleHtml += "<th>"+titles[i]+"</th>";
+                        titleHtml += "<th>" + titles[i] + "</th>";
                     }
-                    titleHtml += "</tr>";
+                    titleHtml += "</tr></thead>";
 
-                    $("#result").append(titleHtml + html);
+                    $("#result").append('<table width="70%" class="table">' + titleHtml + html + "</table>");
+                    $(".mask").css("display", "none");
+                    $(".content").css("display", "none");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $(".mask").css("display", "none");
+                    $(".content").css("display", "none");
 
                 }
             });
@@ -100,6 +77,3 @@
 </script>
 </body>
 </html>
-
-
-
