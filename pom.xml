@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>dt.powsql</groupId>
+    <groupId>dt.sql.power</groupId>
     <artifactId>sqlpower</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
@@ -36,7 +36,7 @@
     </developers>
 
     <modules>
-        <module>sqlpower-powsql</module>
+        <module>sqlpower-core</module>
         <module>sqlpower-commons</module>
         <module>sqlpower-manager</module>
     </modules>
@@ -68,28 +68,24 @@
             <properties>
                 <spark.version>2.4.3</spark.version>
                 <spark.bigversion>2.4</spark.bigversion>
+                <deploy>spark_2.4</deploy>
             </properties>
             <modules>
-                <module>sqlpower-spark-2.4</module>
+                <module>sqlpower-spark</module>
+                <module>sqlpower-spark-2.4-adaptor</module>
             </modules>
-            <dependencies>
-
-            </dependencies>
         </profile>
 
         <profile>
             <id>flink-1.8.2</id>
             <properties>
                 <flink.version>1.8.2</flink.version>
+                <deploy>flink_1.8</deploy>
             </properties>
             <modules>
                 <module>sqlpower-flink</module>
             </modules>
-            <dependencies>
-
-            </dependencies>
         </profile>
-
     </profiles>
 
     <repositories>
@@ -158,12 +154,6 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>

@@ -22,12 +22,12 @@ JARS=$(find ${SQLPOWER_HOME}/jars -name "*.jar" | tr ' ' ',')
 echo "JARS=$JARS"
 
 MAIN_JAR=$(find ${SQLPOWER_HOME}/*/target -type f -name "*.jar" \
-| grep 'sqlpower-powsql' |grep -v "sources" | grep -v "original")
+| grep 'sqlpower-core' |grep -v "sources" | grep -v "original")
 
 echo "MAIN_JAR=$MAIN_JAR"
 
 export DRIVER_MEMORY=${DRIVER_MEMORY:-2g}
-${SPARK_HOME}/bin/spark-submit --class dt.powsql.core.server.ServerApp \
+${SPARK_HOME}/bin/spark-submit --class dt.sql.power.core.server.ServerApp \
         --driver-memory ${DRIVER_MEMORY} \
         --jars ${JARS} \
         --master "local[*]" \
