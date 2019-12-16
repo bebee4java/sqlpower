@@ -9,13 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sqlpower-core_${deploy}</artifactId>
+    <artifactId>sqlpower-core-${deploy.mode}</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>dt.sql.power</groupId>
             <artifactId>sqlpower-manager</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
         </dependency>
     </dependencies>
 
@@ -26,12 +26,12 @@
                 <dependency>
                     <groupId>dt.sql.power</groupId>
                     <artifactId>sqlpower-spark</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>${parent.version}</version>
                 </dependency>
                 <dependency>
                     <groupId>dt.sql.power</groupId>
                     <artifactId>sqlpower-spark-2.4-adaptor</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>${parent.version}</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -42,7 +42,7 @@
                 <dependency>
                     <groupId>dt.sql.power</groupId>
                     <artifactId>sqlpower-flink</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>${parent.version}</version>
                 </dependency>
             </dependencies>
         </profile>
