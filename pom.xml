@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>SQLpower Parent POM</name>
+    <name>SQLPower Parent POM</name>
     <url>https://github.com/bebee4java/sqlpower</url>
     <description>you can do almost anything (e.g. etl, bigdata, ai, etc.) with sqlpower.
     </description>
@@ -140,11 +140,11 @@
             </exclusions>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
             <version>${spring.boot.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- 修改代码热部署 静态资源调整不需要-->
         <!--<dependency>
